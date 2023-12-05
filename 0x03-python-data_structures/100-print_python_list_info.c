@@ -1,5 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <object.h>
+#include <listobject.h>
 #include <Python.h>
 /**
  * print_python_list_info -  function that prints some basic
@@ -8,10 +8,12 @@
  */
 void print_python_list_info(PyObject *p)
 {
-	int elem;
+	long int size = PyList_size(p);
+	int i;
+	PylistObject *obj = (PyListObject *)p;
 
-	printf("[*] Size of the Python List = %lu\n", Py_SIZE(p));
-	printf("[*] Allocated = %lu\n", ((PyListObject *)p)->allocated);
-	for (elem = 0; elem < Py_SIZE(p); elem++)
-		printf("Element %d: %s\n", elem, Py_TYPE(PyList_GetItem(p, elem))->tp_name);
+	printf("[*] size of the python list = %li\n" , size);
+	printf("[*] Allocated = %li\n" , obj->allocated);
+	for (i = 0; i < size; i++)
+		printf("Element %i: %s\n", i, Py_Type(obj->ob_item[i])->type_name);
 }
