@@ -1,4 +1,6 @@
 #!/usr/bin/python3
-def is_same_class(obj, a_class):
-    """Check if abj is exactly a=an instance of a_class."""
-     return type(obj) is a_class
+"""Defines an object attribute lookup function."""
+
+def lookup(obj):
+    """Return a list of an object's available attributes"""
+    return (dir(obj))
